@@ -1,0 +1,20 @@
+---
+- name: Instalar Pacotes NTP
+  yum: 
+        name: "{{ item }}" 
+        state: present
+  with_items:
+        - ntpdate
+        - ntp
+
+- name: Alterar arquivo de configuracao do NTP
+  template: 
+        src: templates/ntp.conf.j2 
+        dest: /etc/ntp.conf
+  notify: restart ntp
+
+- name: Configurar NTP para subir automaticamente
+  service: 
+        name: ntpd 
+        state: started 
+        enabled: yes
