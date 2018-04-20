@@ -1,2 +1,2 @@
 [linux_servers]
-192.168.56.60
+192.168.56.60 ansible_user=root
